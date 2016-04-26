@@ -1,9 +1,11 @@
 body {
-	background-image: url('http://btweemes.weebly.com/uploads/1/2/1/4/12147002/5409499_orig.jpg');
-	background-repeat: no-repeat;
-
+/*	background-image: url('http://btweemes.weebly.com/uploads/1/2/1/4/12147002/5409499_orig.jpg');
+	background-repeat: no-repeat;*/
+	/*text-align: center;*/
 }
 
-h1 {
-	text-align: right;
+.card {
+	border: 5px solid red;
+	display:inline !important;
+	float: left;
 }

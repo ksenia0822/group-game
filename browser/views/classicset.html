@@ -1,1 +1,14 @@
-<h1> classic set </h1>
+<div ng-controller="ClassicGameController">
+	<h3><a ui-sref="home">home</a></h3>
+	<h1> classic set </h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-3 card form-inline"  ng-repeat="card in cards track by $index" ng-click="selectCard(card)" ng-model="currentCard" ng-style="cardStyle(card.index)">
+				<p><span class="glyphicon glyphicon-{{shape(card.index)}}"  ng-repeat="num in qty(card.index)"></p>
+				<!-- <p>{{card.color}}</p> -->
+				<p>{{card.fill}}</p>
+				<p>{{number(card.number)}}</p>
+			</div> <!-- col-lg-3>
+		</div> <!--row -->
+	</div> <!-- container -->
+<div>
