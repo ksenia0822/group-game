@@ -14,12 +14,17 @@ app.factory('ClassicGameFactory', function() {
 	function getRandom(arr) {
 		return arr[Math.floor(Math.random() * arr.length)]
 	}
+
 	var arrayOfCards = [];
-	// var shapes =["diamond", "oval", "snake"];
 	var shapes = ["unchecked", "heart-empty", "off"]
 	var colors = ["red", "green", "purple"];
-	var fills = ["full", "empty", "halfhalf"];
+	// var fills = ["full", "empty", "halfhalf"];
 	var numbers = [1,2,3];
+	var fills = [
+	"url(http://forum.profantasy.com/extensions/InlineImages/image.php?AttachmentID=2877)",
+	"url(http://4globetrotters.world/wp-content/uploads/2015/08/Light-Grey-Background.jpg",
+	null
+	]
 
     ClassicGameFactory.cardStyle = [];
     ClassicGameFactory.shapes = [];
@@ -27,25 +32,26 @@ app.factory('ClassicGameFactory', function() {
 
 	function createNewCard(index) {
 		var newCard = new Card(getRandom(shapes), getRandom(colors), getRandom(fills), getRandom(numbers), index);
+		ClassicGameFactory.cardStyle[index] = {
+			"color": newCard.color,
+			// "background-color": newCard.color,
+			"background-image": newCard.fill
+		}
+		ClassicGameFactory.shapes[index] = {
+			shape: newCard.shape
+		}
+		ClassicGameFactory.numbers[index] = {
+			number: newCard.number
+		}
 
-			return newCard;
+	    return newCard;
 	}
 
 
 
 	ClassicGameFactory.createArray = function() {
 		for (var i = 0; i < 12; i++) {
-			var newCard = new Card(getRandom(shapes), getRandom(colors), getRandom(fills), getRandom(numbers), i);
-			arrayOfCards.push(newCard)
-			ClassicGameFactory.cardStyle[i] = {
-				"color": newCard.color
-			}
-			ClassicGameFactory.shapes[i] = {
-				shape: newCard.shape
-			}
-			ClassicGameFactory.numbers[i] = {
-				number: newCard.number
-			}
+			arrayOfCards.push(createNewCard(i))
 		}
 
 		return arrayOfCards;
@@ -77,15 +83,6 @@ app.factory('ClassicGameFactory', function() {
 		for(var i = 0; i < 2; i++) {
 			var newCard = createNewCard(arr[i].index)
 			arrayOfCards[arr[i].index] = newCard;
-			ClassicGameFactory.cardStyle[arr[i].index] = {
-				"color": newCard.color
-			}
-			ClassicGameFactory.shapes[arr[i].index] = {
-				shape: newCard.shape
-			}
-			ClassicGameFactory.numbers[arr[i].index] = {
-				number: newCard.number
-			}
 		}	
 	}
 
@@ -93,7 +90,6 @@ app.factory('ClassicGameFactory', function() {
 		var first = compareTwo(arr[0], arr[1]);
 		var second = compareTwo(arr[1], arr[2]); 
 		var third = compareTwo(arr[0], arr[2])
-		console.log(first, second, third)
 		if (first === second && second === third && first === third) {
 			replaceCards(arr);
 			threeCards = [];	

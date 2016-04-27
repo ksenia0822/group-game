@@ -5,7 +5,6 @@ body {
 }
 
 .card {
-	border: 5px solid red;
-	display:inline !important;
-	float: left;
+	border: 15px solid #CCCCCC;
+	font-size: 50px;
 }
