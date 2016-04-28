@@ -16,44 +16,29 @@ app.factory('ClassicGameFactory', function() {
 	}
 
 	var arrayOfCards = [];
-	var shapes = ["unchecked", "heart-empty", "off"]
-	var colors = ["red", "green", "purple"];
-	// var fills = ["full", "empty", "halfhalf"];
-	var numbers = [1,2,3];
-	var fills = [
-	"url(http://forum.profantasy.com/extensions/InlineImages/image.php?AttachmentID=2877)",
-	"url(http://4globetrotters.world/wp-content/uploads/2015/08/Light-Grey-Background.jpg",
-	null
-	]
+	var threeSelectedCards = [];
+	var storage = {
+		shapes: ["oval", "squiggle", "diamond"],
+		colors: ["red", "green", "purple"],
+		fills: ["striped", "empty", "solid"],
+		numbers: [1,2,3]
+	};
 
-    ClassicGameFactory.cardStyle = [];
-    ClassicGameFactory.shapes = [];
-    ClassicGameFactory.numbers = [];
+	ClassicGameFactory.count = 0;
 
 	function createNewCard(index) {
-		var newCard = new Card(getRandom(shapes), getRandom(colors), getRandom(fills), getRandom(numbers), index);
-		ClassicGameFactory.cardStyle[index] = {
-			"color": newCard.color,
-			// "background-color": newCard.color,
-			"background-image": newCard.fill
-		}
-		ClassicGameFactory.shapes[index] = {
-			shape: newCard.shape
-		}
-		ClassicGameFactory.numbers[index] = {
-			number: newCard.number
-		}
-
-	    return newCard;
+		return new Card(getRandom(storage.shapes), 
+						getRandom(storage.colors), 
+						getRandom(storage.fills), 
+						getRandom(storage.numbers), 
+						index
+						);
 	}
-
-
 
 	ClassicGameFactory.createArray = function() {
 		for (var i = 0; i < 12; i++) {
 			arrayOfCards.push(createNewCard(i))
 		}
-
 		return arrayOfCards;
 	}
 
@@ -62,20 +47,18 @@ app.factory('ClassicGameFactory', function() {
 		var count = 0;
 		for (var i in obj1) {
 			if (obj1[i] !== obj2[i]) {
-				console.log(obj1[i], obj2[i])
 				count++;
 			}
 		}
 		return count
 	}
 
-	var threeCards = [];
+	
 
 	ClassicGameFactory.selectCard = function(card) {
-		threeCards.push(card)
-		console.log(threeCards)
-		if(threeCards.length > 2) {
-			return compareThree(threeCards) 
+		threeSelectedCards.push(card)
+		if(threeSelectedCards.length > 2) {
+			return compareThree(threeSelectedCards) 
 		} 
 	}
 
@@ -92,12 +75,26 @@ app.factory('ClassicGameFactory', function() {
 		var third = compareTwo(arr[0], arr[2])
 		if (first === second && second === third && first === third) {
 			replaceCards(arr);
-			threeCards = [];	
+			threeSelectedCards = [];
+			ClassicGameFactory.count++;	
 		}
-		threeCards = [];
+		threeSelectedCards = [];
 	}
+
+	ClassicGameFactory.returnCount = function() {
+		return ClassicGameFactory.count;
+	}
+
 
 	return ClassicGameFactory;
 	
 })
+
+
+
+
+
+
+
+
 

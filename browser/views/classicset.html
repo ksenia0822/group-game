@@ -1,13 +1,23 @@
 <div ng-controller="ClassicGameController">
-	<h3><a ui-sref="home">home</a></h3>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xm-3">
 	<h1> classic set </h1>
+			<h3><a ui-sref="home">home</a></h3>
+			<h3>Start New Game</h3>
+		</div>
+	</div>
+</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-md-3 card form-inline"  ng-repeat="card in cards track by $index" ng-click="selectCard(card)" ng-model="currentCard">
-				<p><span class="glyphicon glyphicon-{{shape(card.index)}}"  ng-repeat="num in qty(card.index)" ng-style="cardStyle(card.index)"></p>
-				<!-- <p>{{card.color}}</p> -->
-				<!-- <p>{{card.fill}}</p> -->
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 card"  ng-repeat="card in cards track by $index" ng-click="selectCard(card)">
+			<div class="text-center icon-set-{{card.color}} icon-set-{{card.shape}}-{{card.fill}} icon-set-quantity-{{card.number}}"></div>
 			</div> <!-- col-lg-3>
 		</div> <!--row -->
 	</div> <!-- container -->
+	<div class="container">
+		<div class="row">
+			<h4>Match Count: {{count()}}</h4>
+		</div>
+	</div>
 <div>
