@@ -10,7 +10,7 @@
 </div>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 card"  ng-repeat="card in cards track by $index" ng-click="selectCard(card)">
+			<div ng-class="{'selected-card': card.selected === true}" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 card"  ng-repeat="card in cards track by $index" ng-click="selectCard(card)">
 			<div class="text-center icon-set-{{card.color}} icon-set-{{card.shape}}-{{card.fill}} icon-set-quantity-{{card.number}}"></div>
 			</div> <!-- col-lg-3>
 		</div> <!--row -->

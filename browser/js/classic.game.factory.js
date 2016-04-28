@@ -9,6 +9,7 @@ app.factory('ClassicGameFactory', function() {
 		this.fill = fill;
 		this.number = number;
 		this.index = index;
+		this.selected = null;
 	}
 
 	function getRandom(arr) {
@@ -54,8 +55,12 @@ app.factory('ClassicGameFactory', function() {
 	}
 
 	
-
 	ClassicGameFactory.selectCard = function(card) {
+		if(card.selected) {
+			card.selected = false;
+		} else {
+			card.selected = true;
+		}
 		threeSelectedCards.push(card)
 		if(threeSelectedCards.length > 2) {
 			return compareThree(threeSelectedCards) 
