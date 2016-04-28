@@ -1,18 +1,27 @@
 body {
-/*	background-image: url('http://btweemes.weebly.com/uploads/1/2/1/4/12147002/5409499_orig.jpg');
-	background-repeat: no-repeat;*/
-	/*text-align: center;*/
+	/*background-image: url('http://pizzamyheart.com/wp-content/uploads/2014/02/light-wood.gif');*/
+	background-color: #DACE9C !important;
+	text-align: center;
 }
+
 
 .card {
 	border: 3px solid #CCCCCC;
 	font-size: 50px;
+	background-color: white !important;
 }
 
 .selected-card {
 	border: 3px solid yellow;
 }
 
+.navbar a {
+	display: inline;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 18px;
+	color: black;
 
+}
 
 	
