@@ -37,6 +37,7 @@ app.factory('ClassicGameFactory', function() {
 	}
 
 	ClassicGameFactory.createArray = function() {
+		arrayOfCards = [];
 		for (var i = 0; i < 12; i++) {
 			arrayOfCards.push(createNewCard(i))
 		}
@@ -61,14 +62,22 @@ app.factory('ClassicGameFactory', function() {
 		} else {
 			card.selected = true;
 		}
-		threeSelectedCards.push(card)
+		var isInArray = false;
+
+		for(var i = 0; i < threeSelectedCards.length; i++) {
+			if (threeSelectedCards[i] === card) {
+			 isInArray = true;
+			} 
+		}
+		if(!isInArray) threeSelectedCards.push(card)
+
 		if(threeSelectedCards.length > 2) {
 			return compareThree(threeSelectedCards) 
 		} 
 	}
 
 	function replaceCards(arr) {
-		for(var i = 0; i < 2; i++) {
+		for(var i = 0; i < 3; i++) {
 			var newCard = createNewCard(arr[i].index)
 			arrayOfCards[arr[i].index] = newCard;
 		}	
@@ -84,6 +93,9 @@ app.factory('ClassicGameFactory', function() {
 			ClassicGameFactory.count++;	
 		}
 		threeSelectedCards = [];
+		arr.forEach(function(card) {
+			return card.selected = false;
+		})
 	}
 
 	ClassicGameFactory.returnCount = function() {

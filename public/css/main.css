@@ -5,12 +5,12 @@ body {
 }
 
 .card {
-	border: 15px solid #CCCCCC;
+	border: 3px solid #CCCCCC;
 	font-size: 50px;
 }
 
 .selected-card {
-	border: 15px solid yellow;
+	border: 3px solid yellow;
 }
 
 
