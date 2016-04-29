@@ -6,13 +6,13 @@ body {
 
 
 .card {
-	border: 3px solid #CCCCCC;
+	border: 3px solid #EEEEEE;
 	font-size: 50px;
 	background-color: white !important;
 }
 
 .selected-card {
-	border: 3px solid yellow;
+	border: 3px solid #AAAAAA;
 }
 
 .navbar a {

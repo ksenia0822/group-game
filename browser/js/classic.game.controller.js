@@ -10,8 +10,11 @@ app.controller('ClassicGameController', function($scope, ClassicGameFactory) {
 		return ClassicGameFactory.returnCount();
 	}
 
+	$scope.remainingInSet = function() {
+		return ClassicGameFactory.returnRemainingInSet();
+	}
+
 	$scope.startNewGame = function() {
-		// $scope.cards = [];
 		$scope.cards = ClassicGameFactory.createArray();
 	}
 
