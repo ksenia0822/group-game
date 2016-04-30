@@ -19,6 +19,10 @@ app.controller('ClassicGameController', function($scope, ClassicGameFactory) {
 		$scope.cards = ClassicGameFactory.startNewGame();
 	}
 
+	$scope.pickSet = function() {
+		return ClassicGameFactory.pickSet();
+	}
+
 	$scope.isSet = function() {
 		return ClassicGameFactory.addCards();
 	}
