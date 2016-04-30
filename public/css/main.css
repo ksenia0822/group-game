@@ -1,8 +1,24 @@
 body {
 	/*background-image: url('http://pizzamyheart.com/wp-content/uploads/2014/02/light-wood.gif');*/
 	background-color: #DACE9C !important;
+}
+
+.main-page {
 	text-align: center;
 }
+
+
+h4 {
+	text-align: center;
+	padding: 10px;
+	color: #444444 !important;
+	display: inline;
+}
+
+a {
+	color: #444444 !important;
+}
+
 
 
 .card {
@@ -12,7 +28,7 @@ body {
 }
 
 .selected-card {
-	border: 3px solid #AAAAAA;
+	border: 3px solid #DDDDDD;
 	background-color: #EEEEEE !important;
 }
 
@@ -21,7 +37,7 @@ body {
 	padding: 10px;
 	font-weight: bold;
 	font-size: 18px;
-	color: black;
+	color: #444444 !important;
 
 }
 

@@ -7,6 +7,10 @@
 				<a ui-sref="home">Home</a>
 			</div>
 		</nav>
+			<div class="row">
+				<h4><a ng-click="isSet()">Check for Set</a></h4>
+				<h4><a ng-click="pickSet()">Pick Set</a></h4>
+			</div>
 
 		<div class="row">
 			<div ng-class="{'selected-card': card.selected === true}" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 card"  ng-repeat="card in cards track by $index" ng-click="selectCard(card)">
@@ -17,8 +21,6 @@
 		<div class="row">
 			<h4>Match Count: {{count()}}</h4>
 			<h4>Remaining in Set: {{remainingInSet()}}</h4>
-			<h4><a ng-click="isSet()">Check for Set</a></h4>
-			<h4><a ng-click="pickSet()">Pick Set</a></h4>
 		</div>
 	</div>
 <div>

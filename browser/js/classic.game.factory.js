@@ -12,9 +12,11 @@ app.factory('ClassicGameFactory', function() {
 	}
 
 	var threeSelectedCards = [];
-
+	var fullSet = createFullSet();
+	var arrayOfTwelve = [];
 	var count = 0;
 
+// Function that shuffles array
 	function shuffle (array) {
 		var j = 0, temp = null;
 	  	for (var i = 0; i< array.length; i++) {
@@ -26,6 +28,7 @@ app.factory('ClassicGameFactory', function() {
 	  return array;
 	}
 
+// Function that creates a full set of 81 unique cards
 	function createFullSet() {
 		var set = [];
 		var shapes = ["oval", "squiggle", "diamond"];
@@ -33,7 +36,6 @@ app.factory('ClassicGameFactory', function() {
 		var fills = ["striped", "empty", "solid"];
 		var numbers = [1,2,3];
 		
-
 		for(var s = 0; s <3; s++) {
 			var curShape = shapes[s];
 			for(var c = 0; c < 3; c++) {
@@ -52,30 +54,28 @@ app.factory('ClassicGameFactory', function() {
 	}
 
 
-	var fullSet = createFullSet();
-	var arrayOfTwelve = [];
-
+// Function that start a new game
 	ClassicGameFactory.startNewGame = function() {
 		fullSet = createFullSet();
 		return ClassicGameFactory.createArray();
 	}
 
+// Function that shifts 12 cards from the set and created an array of 12 cards
 	ClassicGameFactory.createArray = function() {
 		arrayOfTwelve = [];	
 		for (var i = 0; i < 12; i++) {
-			if(fullSet.length > 0)
+			if(fullSet.length)
 			arrayOfTwelve.push(fullSet.shift());
 		}
 		count = 0;
 		return arrayOfTwelve;
 	}
 
+// Function that selects 3 cards and called compareThree function 
 	ClassicGameFactory.selectCard = function(card) {
-		if(card.selected) {
-			card.selected = false;
-		} else {
-			card.selected = true;
-		}
+		if(card.selected) card.selected = false;
+		else card.selected = true;
+
 		var isInArray = false;
 
 		for(var i = 0; i < threeSelectedCards.length; i++) {
@@ -83,6 +83,7 @@ app.factory('ClassicGameFactory', function() {
 			 isInArray = true;
 			} 
 		}
+
 		if(!isInArray) threeSelectedCards.push(card)
 
 		if(threeSelectedCards.length > 2) {
@@ -90,7 +91,7 @@ app.factory('ClassicGameFactory', function() {
 		} 
 	}
 
-	
+// Function that checks if 3 cards are the set
 	function isSet(arr){
 		var shapes = ["oval", "squiggle", "diamond"];
 		var colors = ["red", "green", "purple"];
@@ -107,12 +108,10 @@ app.factory('ClassicGameFactory', function() {
 			}
 				
 		} 
-		//console.log(arr[0])
-		//console.log(arr[1])
-		//console.log(arr[2])
 		return true;
 	}
 
+// Function that returns true if the game is over and false otherwise
 	function isGameOver(){
 		if(fullSet.length===0){
 			if(!ClassicGameFactory.containsSet())
@@ -121,13 +120,13 @@ app.factory('ClassicGameFactory', function() {
 		return false;
 	}
 
+// Function that calls isSet on array and if it is a set, calls replaceCards() function and 
+// calls isGameOver() function. It disselects 3 selected cards and clears threeSelectedCards array
 	function compareThree(arr) {
 		if(isSet(arr)){
 			replaceCards();
 			count++;
 			console.log("game over?: " + isGameOver())
-			//Check if game over
-			//game over if deck is empty and no more sets	
 		} 		
 		threeSelectedCards = [];
 		arr.forEach(function(card) {
@@ -136,7 +135,7 @@ app.factory('ClassicGameFactory', function() {
 	}
 
 
-
+// Function that replaces 3 cards if it is a set
 	function replaceCards() {
 		var i = 0;
 		while(i < arrayOfTwelve.length) {
@@ -155,14 +154,17 @@ app.factory('ClassicGameFactory', function() {
 		return arrayOfTwelve;
 	}
 
+// Function that returns the count of matches
 	ClassicGameFactory.returnCount = function() {
 		return count;
 	}
 
+// Function that returns the number of the remaining cards in the set
 	ClassicGameFactory.returnRemainingInSet = function() {
 		return fullSet.length;
 	}
 
+// Function that checks if the 12 cards on the table contain set
 	ClassicGameFactory.containsSet = function() {
 		for(var i = 0; i < arrayOfTwelve.length; i++) {
 			var f1 = arrayOfTwelve[i];
@@ -172,8 +174,6 @@ app.factory('ClassicGameFactory', function() {
 					for(var k = 0; k <arrayOfTwelve.length; k++) {
 						if(!(k===i || k===j)){
 							var t3 = arrayOfTwelve[k];
-							//console.log("set:")
-							//console.log([f1,s2,t3])
 							if(isSet([f1,s2,t3])) {
 								return true;
 							}
@@ -185,20 +185,22 @@ app.factory('ClassicGameFactory', function() {
 		return false;
 	}
 
+
+// Function that finds a set in 12 cards and replaces them
 	ClassicGameFactory.pickSet = function() {
 		for(var i = 0; i < arrayOfTwelve.length; i++) {
-			var f1 = arrayOfTwelve[i];
+			var firstCard = arrayOfTwelve[i];
 			for(var j = 0; j <arrayOfTwelve.length; j++) {
 				if(j!==i){
-					var s2 = arrayOfTwelve[j];
+					var secondCard = arrayOfTwelve[j];
 					for(var k = 0; k <arrayOfTwelve.length; k++) {
 						if(!(k===i || k===j)){
-							var t3 = arrayOfTwelve[k];
-							if(isSet([f1,s2,t3])) {
-								f1.selected = true
-								s2.selected = true
-								t3.selected = true
-								compareThree([f1,s2,t3])
+							var thirdCard = arrayOfTwelve[k];
+							if(isSet([firstCard,secondCard,thirdCard])) {
+								firstCard.selected = true
+								secondCard.selected = true
+								thirdCard.selected = true
+								compareThree([firstCard,secondCard,thirdCard])
 								return true;
 							}
 						}
@@ -209,6 +211,7 @@ app.factory('ClassicGameFactory', function() {
 		return false;
 	}
 
+// Function that adds 3 cards on the table if there is no set
 	ClassicGameFactory.addCards = function() {
 		if(!ClassicGameFactory.containsSet()) {
 			for(var i = 0; i < 3; i++) {
