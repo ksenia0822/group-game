@@ -12,38 +12,47 @@ app.factory('ClassicGameFactory', function() {
 		this.selected = null;
 	}
 
-	function getRandom(arr) {
-		return arr[Math.floor(Math.random() * arr.length)]
-	}
 	var threeSelectedCards = [];
 
 	var count = 0;
 
-	function createFullSet() {
-	var set = [];
-	var shapes = ["oval", "squiggle", "diamond"];
-	var colors = ["red", "green", "purple"];
-	var fills = ["striped", "empty", "solid"];
-	var numbers = [1,2,3];
-	var index = 0;
+	function shuffle (array) {
+		var j = 0, temp = null;
+	  	for (var i = 0; i< array.length; i++) {
+		    j = Math.floor(Math.random() * (i + 1))
+		    temp = array[i]
+		    array[i] = array[j]
+		    array[j] = temp
+		}
+	  return array;
+	}
 
-	for(var s = 0; s <3; s++) {
-		var curShape = shapes[s];
-		for(var c = 0; c < 3; c++) {
-			var curColor = colors[c]
-			for(var f = 0; f < 3; f++) {
-				var curFill = fills[f]
-				for(var n = 0; n < 3; n++) {
-					var curNumber = numbers[n]
-					var newCard = new Card(curShape, curColor, curFill, curNumber, index)
-					index++;
-					set.push(newCard)
+	function createFullSet() {
+		var set = [];
+		var shapes = ["oval", "squiggle", "diamond"];
+		var colors = ["red", "green", "purple"];
+		var fills = ["striped", "empty", "solid"];
+		var numbers = [1,2,3];
+		var index = 0;
+
+		for(var s = 0; s <3; s++) {
+			var curShape = shapes[s];
+			for(var c = 0; c < 3; c++) {
+				var curColor = colors[c]
+				for(var f = 0; f < 3; f++) {
+					var curFill = fills[f]
+					for(var n = 0; n < 3; n++) {
+						var curNumber = numbers[n]
+						var newCard = new Card(curShape, curColor, curFill, curNumber, index)
+						index++;
+						set.push(newCard)
+					}
 				}
 			}
 		}
+		return shuffle(set);
 	}
-	return set;
-}
+
 
 	var fullSet = createFullSet();
 	var arrayOfTwelve = [];
@@ -121,7 +130,6 @@ app.factory('ClassicGameFactory', function() {
 		}
 	}
 
-
 	function replaceCards() {
 		var i = 0;
 		while(i < arrayOfTwelve.length) {
@@ -169,6 +177,8 @@ app.factory('ClassicGameFactory', function() {
 			for(var i = 0; i < 3; i++) {
 				arrayOfTwelve.push(fullSet.shift())
 			}
+		} else {
+			console.log("there is a set")
 		}
 	}
 
