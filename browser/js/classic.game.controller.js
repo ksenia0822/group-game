@@ -6,6 +6,7 @@ app.controller('ClassicGameController', function($scope, ClassicGameFactory) {
 		ClassicGameFactory.selectCard(card)
 	}
 
+
 	$scope.count = function() {
 		return ClassicGameFactory.returnCount();
 	}
@@ -15,7 +16,11 @@ app.controller('ClassicGameController', function($scope, ClassicGameFactory) {
 	}
 
 	$scope.startNewGame = function() {
-		$scope.cards = ClassicGameFactory.createArray();
+		$scope.cards = ClassicGameFactory.startNewGame();
+	}
+
+	$scope.isSet = function() {
+		return ClassicGameFactory.addCards();
 	}
 
 })

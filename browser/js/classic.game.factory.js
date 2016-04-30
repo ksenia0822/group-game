@@ -17,7 +17,7 @@ app.factory('ClassicGameFactory', function() {
 	}
 	var threeSelectedCards = [];
 
-	ClassicGameFactory.count = 0;
+	var count = 0;
 
 	function createFullSet() {
 	var set = [];
@@ -48,16 +48,18 @@ app.factory('ClassicGameFactory', function() {
 	var fullSet = createFullSet();
 	var arrayOfTwelve = [];
 
+	ClassicGameFactory.startNewGame = function() {
+		fullSet = createFullSet();
+		return ClassicGameFactory.createArray();
+	}
+
 	ClassicGameFactory.createArray = function() {
-		arrayOfTwelve = [];
+		arrayOfTwelve = [];	
 		for (var i = 0; i < 12; i++) {
-			if(fullSet.length) {
-				arrayOfTwelve.push(fullSet.shift());
-			} else {
-				console.log('game over')				
-			}
+			if(fullSet.length > 0)
+			arrayOfTwelve.push(fullSet.shift());
 		}
-		ClassicGameFactory.count = 0;
+		count = 0;
 		return arrayOfTwelve;
 	}
 
@@ -93,76 +95,88 @@ app.factory('ClassicGameFactory', function() {
 		} 
 	}
 
-
-
 	function compareThree(arr) {
 		var first = compareTwo(arr[0], arr[1]);
 		var second = compareTwo(arr[1], arr[2]); 
 		var third = compareTwo(arr[0], arr[2])
 		if (first === second && second === third && first === third) {
-			replaceCards(arrayOfTwelve);
-			ClassicGameFactory.count++;	
-		}
+			replaceCards();
+			count++;	
+		} 
 		threeSelectedCards = [];
 		arr.forEach(function(card) {
 			return card.selected = false;
 		})
 	}
 
-	// function replaceCards(arr) {
-	// 	for(var i = 0; i < 3; i++) {
-	// 		var card = arr[i]
-	// 		var newCard = fullSet.shift();
-	// 		arrayOfTwelve[card.index] = newCard;
-	// 	}	
-	// }
+	function isMatch(arr) {
+		var first = compareTwo(arr[0], arr[1]);
+		var second = compareTwo(arr[1], arr[2]); 
+		var third = compareTwo(arr[0], arr[2])
+		if (first === second && second === third && first === third) {
+			return true;	
+		}
+		else {
+			return false
+		}
+	}
 
-	function replaceCards(arr) {
-		return arrayOfTwelve.forEach(function(card) {
-			if(card.selected) {
-				card = fullSet.shift();
-				console.log(card)
+
+	function replaceCards() {
+		var i = 0;
+		while(i < arrayOfTwelve.length) {
+			if(arrayOfTwelve[i].selected === true) {
+				if(fullSet.length > 0 && arrayOfTwelve.length < 13) {
+					arrayOfTwelve[i] = fullSet.shift();		
+				}
+				else {
+					arrayOfTwelve.splice(i, 1)
+					i--;
+				}
 			}
-		})
-		return arr;
+			i++;
+
+		}
+		return arrayOfTwelve;
 	}
 
 	ClassicGameFactory.returnCount = function() {
-		return ClassicGameFactory.count;
+		return count;
 	}
 
 	ClassicGameFactory.returnRemainingInSet = function() {
 		return fullSet.length;
 	}
 
+	ClassicGameFactory.isThereASet = function() {
+		for(var i = 0; i < arrayOfTwelve.length; i++) {
+			var f1 = arrayOfTwelve[i];
+			for(var j = 0; j <arrayOfTwelve.length; j++) {
+				var s2 = arrayOfTwelve[j];
+				for(var k = 0; k <arrayOfTwelve.length; k++) {
+					var t3 = arrayOfTwelve[k];
+					if(isMatch([f1,s2,t3])) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	ClassicGameFactory.addCards = function() {
+		if(!ClassicGameFactory.isThereASet()) {
+			for(var i = 0; i < 3; i++) {
+				arrayOfTwelve.push(fullSet.shift())
+			}
+		}
+	}
+
 	return ClassicGameFactory;
 	
 })
 
-	// var arrayOfCards = [];
 
-	// var storage = {
-	// 	shapes: ["oval", "squiggle", "diamond"],
-	// 	colors: ["red", "green", "purple"],
-	// 	fills: ["striped", "empty", "solid"],
-	// 	numbers: [1,2,3]
-	// };
-
-	// function createNewCard(index) {
-	// 	return new Card(getRandom(storage.shapes), 
-	// 					getRandom(storage.colors), 
-	// 					getRandom(storage.fills), 
-	// 					getRandom(storage.numbers), 
-	// 					index
-	// 					);
-	// }
-	// ClassicGameFactory.createArray = function() {
-	// 	arrayOfCards = [];
-	// 	for (var i = 0; i < 12; i++) {
-	// 		arrayOfCards.push(createNewCard(i))
-	// 	}
-	// 	return arrayOfCards;
-	// }
 
 
 
