@@ -252,6 +252,7 @@ app.factory('ClassicGameFactory', function() {
 		return false;
 	}
 
+var hintSet = false;
 // Function that adds 3 cards on the table if there is no set
 	ClassicGameFactory.addCards = function() {
 		if(!ClassicGameFactory.containsSet()) {
@@ -260,8 +261,13 @@ app.factory('ClassicGameFactory', function() {
 					arrayOfTwelve.push(fullSet.shift())
 			}
 		} else {
-			console.log("there is a set")
+			if(!hintSet) hintSet = true;
+			else hintSet = false;
 		}
+	}
+
+	ClassicGameFactory.returnHintSet = function() {
+		return hintSet;
 	}
 
 	return ClassicGameFactory;
