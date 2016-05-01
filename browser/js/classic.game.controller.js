@@ -27,5 +27,7 @@ app.controller('ClassicGameController', function($scope, ClassicGameFactory) {
 		return ClassicGameFactory.addCards();
 	}
 
+	$scope.startNewGame();
+
 })
 

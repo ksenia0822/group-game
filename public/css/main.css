@@ -1,35 +1,57 @@
 body {
-	/*background-image: url('http://pizzamyheart.com/wp-content/uploads/2014/02/light-wood.gif');*/
+	background-image: url('../background-1.jpg');
 	background-color: #DACE9C !important;
+	color: #64D96D !important;
+	/*font-family: "Times New Roman", Times, serif !important;*/
+	font-family: "Lucida Console", Monaco, monospace !important;
 }
 
 .main-page {
 	text-align: center;
 }
 
+h1 {
+	font-size: 50px !important;
+	font-weight: bold !important;
+	color: #FE0082 !important;
+	margin-top: 50px !important;
+}
 
 h4 {
 	text-align: center;
 	padding: 10px;
-	color: #444444 !important;
 	display: inline;
 }
 
 a {
-	color: #444444 !important;
+	color: #64D96D !important;
+}
+
+/*.btn {
+	color: black !important;
+}*/
+
+.btn {
+	background-color: #807ED3 !important;
+	font-size: 15px !important;
+	color: white !important;
+}
+
+img {
+	width: 600px;
+	margin: 50px;
+	margin-top: 100px;
 }
 
 
-
 .card {
-	border: 3px solid #EEEEEE;
+	border: 3px solid #BBBBBB;
 	font-size: 50px;
 	background-color: white !important;
 }
 
 .selected-card {
-	border: 3px solid #DDDDDD;
-	background-color: #EEEEEE !important;
+	background-color: #DDDDDD !important;
 }
 
 .navbar a {
@@ -37,8 +59,10 @@ a {
 	padding: 10px;
 	font-weight: bold;
 	font-size: 18px;
-	color: #444444 !important;
-
+	color: #FE0082 !important;
 }
 
+.margin {
+	margin: 30px;
+}
 	
