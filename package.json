@@ -9,6 +9,9 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "dependencies": {
     "angular": "^1.5.5",
     "angular-ui-router": "^0.2.18",
