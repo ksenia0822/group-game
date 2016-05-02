@@ -139,12 +139,15 @@ function select(card) {
 			replaceCards();
 			count++;
 		} 		
+	 	return disselect(arr);
+	}
+
+function disselect(arr) {
 		threeSelectedCards = [];
 		arr.forEach(function(card) {
 			card.selected = false;
 		})
-	}
-
+}
 
 // Function that replaces 3 cards if it is a set
 	function replaceCards() {
@@ -238,6 +241,7 @@ function select(card) {
 									compareThree([firstCard,secondCard,thirdCard])	
 								} 
 								else if(firstCard.selected && secondCard.selected)  {
+									console.log(firstCard.selected, secondCard.selected)
 									thirdCard.selected = true
 									select(thirdCard)
 								} 
