@@ -23,7 +23,8 @@ app.factory('ClassicGameFactory', function() {
 	var shapes = ["oval", "squiggle", "diamond"];
 	var colors = ["red", "green", "purple"];
 	var fills = ["striped", "empty", "solid"];
-	var numbers = [1,2,3];
+	var numbers = [1,2,3];	
+	var hintMessage = false;
 
 // Function that shuffles array
 	function shuffle (array) {
@@ -132,17 +133,22 @@ app.factory('ClassicGameFactory', function() {
 
 // Function that selects 3 cards and called compareThree function 
 	ClassicGameFactory.selectCard = function(card) {
+		hintMessage = false;
 		if(card.selected) card.selected = false;
 		else card.selected = true;
 
-		var isInArray = false;
+		return select(card);
+	}
 
+// Helper function that puts selected card into an array of three and calls compareThree
+// function
+function select(card) {
+		var isInArray = false;
 		for(var i = 0; i < threeSelectedCards.length; i++) {
 			if (threeSelectedCards[i] === card) {
 			 isInArray = true;
 			} 
 		}
-
 		if(!isInArray) threeSelectedCards.push(card)
 
 		if(threeSelectedCards.length > 2) {
@@ -167,7 +173,6 @@ app.factory('ClassicGameFactory', function() {
 		if(isSet(arr)){
 			replaceCards();
 			count++;
-			console.log("game over?: " + isGameOver())
 		} 		
 		threeSelectedCards = [];
 		arr.forEach(function(card) {
@@ -227,8 +232,34 @@ app.factory('ClassicGameFactory', function() {
 	}
 
 
+// // Function that finds a set in 12 cards and replaces them
+// 	ClassicGameFactory.pickSet = function() {
+// 		for(var i = 0; i < arrayOfTwelve.length; i++) {
+// 			var firstCard = arrayOfTwelve[i];
+// 			for(var j = 0; j <arrayOfTwelve.length; j++) {
+// 				if(j!==i){
+// 					var secondCard = arrayOfTwelve[j];
+// 					for(var k = 0; k <arrayOfTwelve.length; k++) {
+// 						if(!(k===i || k===j)){
+// 							var thirdCard = arrayOfTwelve[k];
+// 							if(isSet([firstCard,secondCard,thirdCard])) {
+// 								firstCard.selected = true
+// 								secondCard.selected = true
+// 								thirdCard.selected = true
+// 								compareThree([firstCard,secondCard,thirdCard])
+// 								return true;
+// 							}
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+// 		return false;
+// 	}
+
+
 // Function that finds a set in 12 cards and replaces them
-	ClassicGameFactory.pickSet = function() {
+	ClassicGameFactory.giveHint = function() {
 		for(var i = 0; i < arrayOfTwelve.length; i++) {
 			var firstCard = arrayOfTwelve[i];
 			for(var j = 0; j <arrayOfTwelve.length; j++) {
@@ -238,10 +269,22 @@ app.factory('ClassicGameFactory', function() {
 						if(!(k===i || k===j)){
 							var thirdCard = arrayOfTwelve[k];
 							if(isSet([firstCard,secondCard,thirdCard])) {
-								firstCard.selected = true
-								secondCard.selected = true
-								thirdCard.selected = true
-								compareThree([firstCard,secondCard,thirdCard])
+								if(firstCard.selected && secondCard.selected && thirdCard.selected) {
+									compareThree([firstCard,secondCard,thirdCard])	
+								} 
+								else if(firstCard.selected && secondCard.selected)  {
+									thirdCard.selected = true
+									select(thirdCard)
+								} 
+								else if(firstCard.selected) {
+									secondCard.selected = true
+									select(secondCard)
+								} 
+								else {
+									firstCard.selected = true
+									select(firstCard)							
+								}
+
 								return true;
 							}
 						}
@@ -252,7 +295,7 @@ app.factory('ClassicGameFactory', function() {
 		return false;
 	}
 
-var hintSet = false;
+
 // Function that adds 3 cards on the table if there is no set
 	ClassicGameFactory.addCards = function() {
 		if(!ClassicGameFactory.containsSet()) {
@@ -260,14 +303,14 @@ var hintSet = false;
 				if(fullSet.length > 0)
 					arrayOfTwelve.push(fullSet.shift())
 			}
+			hintMessage = false;
 		} else {
-			if(!hintSet) hintSet = true;
-			else hintSet = false;
+			hintMessage = true;
 		}
 	}
 
-	ClassicGameFactory.returnHintSet = function() {
-		return hintSet;
+	ClassicGameFactory.showHintMessage = function() {
+		return hintMessage;
 	}
 
 	return ClassicGameFactory;

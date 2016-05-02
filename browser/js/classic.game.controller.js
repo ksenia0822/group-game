@@ -19,19 +19,17 @@ app.controller('ClassicGameController', function($scope, ClassicGameFactory) {
 		$scope.cards = ClassicGameFactory.startNewGame();
 	}
 
-	$scope.pickSet = function() {
-		return ClassicGameFactory.pickSet();
+	$scope.giveHint = function() {
+		return ClassicGameFactory.giveHint();
 	}
 
 	$scope.isSet = function() {
 		return ClassicGameFactory.addCards();
 	}
 
-	$scope.hintSet = function() {
-		return ClassicGameFactory.returnHintSet();
+	$scope.showHintMessage = function() {
+		return ClassicGameFactory.showHintMessage();
 	}
-
-	$scope.startNewGame();
 
 })
 
