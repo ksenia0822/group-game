@@ -11,11 +11,6 @@ app.factory('ClassicGameFactory', function() {
 		this.selected = false;
 	}
 
-	// function Card(style) {
-	// 	this.style = style;
-	// 	this.selected = false;
-	// }
-
 	var threeSelectedCards = [];
 	var fullSet = createFullSet();
 	var arrayOfTwelve = [];
@@ -38,13 +33,6 @@ app.factory('ClassicGameFactory', function() {
 	  return array;
 	}
 
-	// var style = {
-	// 	shapes: ["oval", "squiggle", "diamond"],
-	// 	colors: ["red", "green", "purple"],
-	// 	fills: ["striped", "empty", "solid"],
-	// 	numbers: [1,2,3]
-	// }
-
 // Function that creates a full set of 81 unique cards
 	function createFullSet() {
 		var set = [];
@@ -55,39 +43,16 @@ app.factory('ClassicGameFactory', function() {
 
 		
 		for(var s = 0; s <3; s++) {
-			var curShape = shapes[s];
 			for(var c = 0; c < 3; c++) {
-				var curColor = colors[c]
 				for(var f = 0; f < 3; f++) {
-					var curFill = fills[f]
 					for(var n = 0; n < 3; n++) {
 						var curNumber = numbers[n]
-						// var newCard = new Card(curShape, curColor, curFill, curNumber)
 						var newCard = new Card(shapes[s], colors[c], fills[f], numbers[n])
-
 						set.push(newCard)
 					}
 				}
 			}
 		}
-
-		// for(var s = 0; s <3; s++) {
-		// 	for(var c = 0; c < 3; c++) {
-		// 		for(var f = 0; f < 3; f++) {
-		// 			for(var n = 0; n < 3; n++) {
-		// 				var newStyle = {
-		// 					shape: style.shapes[s],
-		// 					color: style.colors[c],
-		// 					fill: style.fills[f],
-		// 					number: style.numbers[n]
-		// 				}
-		// 				var newCard = new Card(newStyle)
-		// 				set.push(newCard)
-		// 			}
-		// 		}
-		// 	}
-		// }
-
 
 		return shuffle(set);
 	}
