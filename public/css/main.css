@@ -1,6 +1,7 @@
 body {
 	/*background-image: url('../background-1.jpg');*/
-	background-color: #ACB1B0 !important;
+	/*background-color: #96C0CE !important;*/
+	background-color: #B6CBC2 !important;
 	font-family: "Lucida Console", Monaco, monospace !important;
 }
 
@@ -26,7 +27,7 @@ a {
 }
 
 .btn {
-	background-color: #000066 !important;
+	background-color: #525564 !important;
 	font-size: 15px !important;
 	color: white !important;
 	margin: 0px 10px;
