@@ -8,9 +8,15 @@
 			</div>
 		</nav>
 
+
+		<div>
+			<h5>Invite others to join this game by sharing URL:</h5>
+			<input type="text" placeholder="www.example.com"></input>
+		</div>
+
 		<div class="row margin-top">
-			<h4 class="pull-left">Match Count: <strong> {{count()}} </strong></h4>
-			<h4 class="pull-right">Remaining in Deck: <strong>{{remainingInSet()}}</strong></h4>
+			<h5 class="pull-left">Player 1: <strong> {{count()}} </strong></h5>
+			<h5 class="pull-right">Remaining in Deck: <strong>{{remainingInSet()}}</strong></h5>
 		</div>
 
 		<div class="row">
@@ -18,11 +24,14 @@
 				<div class="text-center icon-set-{{card.color}} icon-set-{{card.shape}}-{{card.fill}} icon-set-quantity-{{card.number}}"></div>
 			</div> <!-- col-lg-3 -->
 		</div> <!--row -->
+
 		<div class="row margin">
 			<button class="pull-right btn" ng-click="isSet()">Check for Match</button>
 			<button class="pull-right btn" ng-click="giveHint()">Hint</button>
-			<h4 ng-show="showHintMessage()">There is a match</h4>
+			<h5 ng-show="showHintMessage()">There is a match</h5>
 		</div>
+
+
 
 	</div>
 <div>

@@ -1,6 +1,4 @@
 body {
-	/*background-image: url('../background-1.jpg');*/
-	/*background-color: #96C0CE !important;*/
 	background-color: #B6CBC2 !important;
 	font-family: "Lucida Console", Monaco, monospace !important;
 }
@@ -12,15 +10,16 @@ body {
 h1 {
 	font-size: 50px !important;
 	font-weight: bold !important;
-/*	color: #FE0082 !important;*/
 	margin-top: 50px !important;
 }
 
-h4 {
+h5 {
 	text-align: center;
 	padding: 10px;
 	display: inline;
 }
+
+
 
 a {
 	/*color: #9ae59a !important;*/
@@ -57,7 +56,6 @@ img {
 .navbar a {
 	display: inline;
 	padding: 10px;
-	/*font-size: 18px;*/
 	color: #444444 !important;
 	font-weight: bold;
 	font-family: "Verdana", Sans-Serif;
@@ -70,5 +68,9 @@ img {
 
 .margin-top {
 	margin-top: 50px;
+}
+
+.match-count {
+	height: 300px;
 }
 	

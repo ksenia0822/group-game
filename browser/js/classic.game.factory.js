@@ -77,8 +77,6 @@ app.factory('ClassicGameFactory', function() {
 		return true;
 	}
 
-
-
 // Function that start a new game
 	ClassicGameFactory.startNewGame = function() {
 		fullSet = createFullSet();
@@ -99,29 +97,27 @@ app.factory('ClassicGameFactory', function() {
 // Function that selects 3 cards and called compareThree function 
 	ClassicGameFactory.selectCard = function(card) {
 		hintMessage = false;
-		if(card.selected) card.selected = false;
-		else card.selected = true;
+		if(card.selected) disselect(card)
+		else select(card);
 
-		return select(card);
 	}
 
-// Helper function that puts selected card into an array of three and calls compareThree
-// function
 function select(card) {
-		var isInArray = false;
-		for(var i = 0; i < threeSelectedCards.length; i++) {
-			if (threeSelectedCards[i] === card) {
-			 isInArray = true;
-			} 
+	card.selected = true;
+	threeSelectedCards.push(card)
+	if(threeSelectedCards.length > 2) {
+		compareThree(threeSelectedCards) 
+	} 
+}
+
+function disselect(card) {
+	card.selected = false;
+	for(var i = 0; i < threeSelectedCards.length; i++) {
+		if(threeSelectedCards[i] === card) {
+			threeSelectedCards.splice(i, 1)
 		}
-		if(!isInArray) threeSelectedCards.push(card)
-
-		if(threeSelectedCards.length > 2) {
-			return compareThree(threeSelectedCards) 
-		} 
 	}
-
-
+}
 
 // Function that returns true if the game is over and false otherwise
 	function isGameOver(){
@@ -134,20 +130,18 @@ function select(card) {
 
 // Function that calls isSet on array and if it is a set, calls replaceCards() function and 
 // calls isGameOver() function. It disselects 3 selected cards and clears threeSelectedCards array
-	function compareThree(arr) {
-		if(isSet(arr)){
-			replaceCards();
-			count++;
-		} 		
-	 	return disselect(arr);
-	}
-
-function disselect(arr) {
-		threeSelectedCards = [];
-		arr.forEach(function(card) {
-			card.selected = false;
-		})
+function compareThree(arr) {
+	if(isSet(arr)){
+		replaceCards();
+		count++;
+	} 		
+ 	// return disselect(arr);
+ 	threeSelectedCards = [];
+ 	for(var i = 0; i < arr.length; i++) {
+ 		arr[i].selected = false;
+ 	}
 }
+
 
 // Function that replaces 3 cards if it is a set
 	function replaceCards() {
@@ -239,11 +233,12 @@ function disselect(arr) {
 							if(isSet([firstCard,secondCard,thirdCard])) {
 								if(firstCard.selected && secondCard.selected && thirdCard.selected) {
 									compareThree([firstCard,secondCard,thirdCard])	
+									
 								} 
 								else if(firstCard.selected && secondCard.selected)  {
-									console.log(firstCard.selected, secondCard.selected)
 									thirdCard.selected = true
 									select(thirdCard)
+									count--;
 								} 
 								else if(firstCard.selected) {
 									secondCard.selected = true
@@ -253,6 +248,7 @@ function disselect(arr) {
 									firstCard.selected = true
 									select(firstCard)							
 								}
+
 
 								return true;
 							}
